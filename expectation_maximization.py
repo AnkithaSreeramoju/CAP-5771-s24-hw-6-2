@@ -485,7 +485,7 @@ def gaussian_mixture():
 
 
 # ----------------------------------------------------------------------
-if _name_ == "_main_":
+if __name__ == "__main__":
     all_answers = gaussian_mixture()
     # del all_answers["em_algorithm_function"]  # = None
 
