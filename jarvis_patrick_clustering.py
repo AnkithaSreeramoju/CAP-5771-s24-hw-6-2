@@ -10,6 +10,7 @@ from scipy.spatial import distance
 from scipy.spatial.distance import pdist, squareform
 import pickle
 from typing import Tuple,Optional
+import matplotlib.backends.backend_pdf as pdf
 
 ######################################################################
 #####     CHECK THE PARAMETERS     ########
@@ -172,7 +173,7 @@ def jarvis_patrick_clustering():
     min_sse = np.inf   # Largest possible float
 
 
-
+    pdf_pages = pdf.PdfPages("jarvis_patrick_clustering_plots.pdf")
 
     # Define the range of parameters for the parameter study
     k_values = np.linspace(3, 8, 6, dtype=int)
@@ -275,7 +276,7 @@ def jarvis_patrick_clustering():
     plt.xlabel('k')
     plt.ylabel('smin')
     plt.colorbar()
-    plt.savefig('Q2_Plot1.png')
+    pdf_pages.savefig()
     plt.close()
 
     plt.scatter(k_values, smin_values, c=sses, cmap='viridis', s=25)
@@ -283,7 +284,7 @@ def jarvis_patrick_clustering():
     plt.xlabel('k')
     plt.ylabel('smin')
     plt.colorbar()
-    plt.savefig('Q2_Plot2.png')
+    pdf_pages.savefig()
     plt.close()
 
 
@@ -298,7 +299,7 @@ def jarvis_patrick_clustering():
     plt.title('Clusters with Largest ARI')
     plt.xlabel('Feature 1')
     plt.ylabel('Feature 2')
-    plt.savefig('Q2_Plot3.png')
+    pdf_pages.savefig()
     plt.close()
     answers["cluster scatterplot with largest ARI"] = plot_ARI
     
@@ -306,8 +307,10 @@ def jarvis_patrick_clustering():
     plt.title('Clusters with Smallest SSE')
     plt.xlabel('Feature 1')
     plt.ylabel('Feature 2')
-    plt.savefig('Q3_Plot4.png')
+    pdf_pages.savefig()
     plt.close()
+
+    pdf_pages.close()
     answers["cluster scatterplot with smallest SSE"] = plot_SSE
 
 
